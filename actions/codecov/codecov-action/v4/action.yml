@@ -1,0 +1,176 @@
+name: codecov/codecov-action (wrapped) v4
+description: >-
+  Composite wrapper for codecov/codecov-action pinned to
+  b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238
+inputs:
+  token:
+    description: Repository Codecov token. Used to authorize report uploads
+    required: false
+  codecov_yml_path:
+    description: Specify the path to the Codecov YML
+    required: false
+  commit_parent:
+    description: Override to specify the parent commit SHA
+    required: false
+  directory:
+    description: Directory to search for coverage reports.
+    required: false
+  disable_file_fixes:
+    description: >-
+      Disable file fixes to ignore common lines from coverage (e.g. blank lines
+      or empty brackets)
+    required: false
+  disable_search:
+    description: >-
+      Disable search for coverage files. This is helpful when specifying what
+      files you want to upload with the --file option.
+    required: false
+  disable_safe_directory:
+    description: Disable setting safe directory. Set to true to disable.
+    required: false
+  dry_run:
+    description: Don't upload files to Codecov
+    required: false
+  env_vars:
+    description: Environment variables to tag the upload with (e.g. PYTHON | OS,PYTHON)
+    required: false
+  exclude:
+    description: Folders to exclude from search
+    required: false
+  fail_ci_if_error:
+    description: >-
+      Specify whether or not CI build should fail if Codecov runs into an error
+      during upload
+    required: false
+  file:
+    description: Path to coverage file to upload
+    required: false
+  files:
+    description: Comma-separated list of files to upload
+    required: false
+  flags:
+    description: >-
+      Flag upload to group coverage metrics (e.g. unittests | integration |
+      ui,chrome)
+    required: false
+  git_service:
+    description: Override the git_service (e.g. github_enterprise)
+    required: false
+  handle_no_reports_found:
+    description: Raise no exceptions when no coverage reports found
+    required: false
+  job_code:
+    description: The job code
+    required: false
+  name:
+    description: User defined upload name. Visible in Codecov UI
+    required: false
+  network_filter:
+    description: >-
+      Specify a filter on the files listed in the network section of the Codecov
+      report. This will only add files whose path begin with the specified
+      filter. Useful for upload-specific path fixing
+    required: false
+  network_prefix:
+    description: >-
+      Specify a prefix on files listed in the network section of the Codecov
+      report. Useful to help resolve path fixing
+    required: false
+  os:
+    description: Override the assumed OS. Options are linux | macos | windows.
+    required: false
+  override_branch:
+    description: Specify the branch name
+    required: false
+  override_build:
+    description: Specify the build number
+    required: false
+  override_build_url:
+    description: The URL of the build where this is running
+    required: false
+  override_commit:
+    description: Specify the commit SHA
+    required: false
+  override_pr:
+    description: Specify the pull request number
+    required: false
+  plugin:
+    description: >-
+      plugins to run. Options: xcode, gcov, pycoverage. The default behavior
+      runs them all.
+    required: false
+  plugins:
+    description: Comma-separated list of plugins for use during upload.
+    required: false
+  report_code:
+    description: The code of the report. If unsure, do not include
+    required: false
+  root_dir:
+    description: Used when not in git/hg project to identify project root directory
+    required: false
+  slug:
+    description: Specify the slug manually (Enterprise use)
+    required: false
+  url:
+    description: Specify the base url to upload (Enterprise use)
+    required: false
+  use_legacy_upload_endpoint:
+    description: Use the legacy upload endpoint
+    required: false
+  use_oidc:
+    description: Use OIDC instead of token. This will ignore any token supplied
+    required: false
+  verbose:
+    description: Specify whether the Codecov output should be verbose
+    required: false
+  version:
+    description: >-
+      Specify which version of the Codecov CLI should be used. Defaults to
+      `latest`
+    required: false
+  working-directory:
+    description: Directory in which to execute codecov.sh
+    required: false
+outputs: {}
+runs:
+  using: composite
+  steps:
+    - uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238
+      with:
+        token: ${{ inputs.token }}
+        codecov_yml_path: ${{ inputs.codecov_yml_path }}
+        commit_parent: ${{ inputs.commit_parent }}
+        directory: ${{ inputs.directory }}
+        disable_file_fixes: ${{ inputs.disable_file_fixes }}
+        disable_search: ${{ inputs.disable_search }}
+        disable_safe_directory: ${{ inputs.disable_safe_directory }}
+        dry_run: ${{ inputs.dry_run }}
+        env_vars: ${{ inputs.env_vars }}
+        exclude: ${{ inputs.exclude }}
+        fail_ci_if_error: ${{ inputs.fail_ci_if_error }}
+        file: ${{ inputs.file }}
+        files: ${{ inputs.files }}
+        flags: ${{ inputs.flags }}
+        git_service: ${{ inputs.git_service }}
+        handle_no_reports_found: ${{ inputs.handle_no_reports_found }}
+        job_code: ${{ inputs.job_code }}
+        name: ${{ inputs.name }}
+        network_filter: ${{ inputs.network_filter }}
+        network_prefix: ${{ inputs.network_prefix }}
+        os: ${{ inputs.os }}
+        override_branch: ${{ inputs.override_branch }}
+        override_build: ${{ inputs.override_build }}
+        override_build_url: ${{ inputs.override_build_url }}
+        override_commit: ${{ inputs.override_commit }}
+        override_pr: ${{ inputs.override_pr }}
+        plugin: ${{ inputs.plugin }}
+        plugins: ${{ inputs.plugins }}
+        report_code: ${{ inputs.report_code }}
+        root_dir: ${{ inputs.root_dir }}
+        slug: ${{ inputs.slug }}
+        url: ${{ inputs.url }}
+        use_legacy_upload_endpoint: ${{ inputs.use_legacy_upload_endpoint }}
+        use_oidc: ${{ inputs.use_oidc }}
+        verbose: ${{ inputs.verbose }}
+        version: ${{ inputs.version }}
+        working-directory: ${{ inputs.working-directory }}

@@ -1,0 +1,21 @@
+name: chetan/git-restore-mtime-action (wrapped) v2
+description: >-
+  Composite wrapper for chetan/git-restore-mtime-action pinned to
+  d186aca54f8760da4dec55313195e51ed3ebb0b3
+inputs:
+  working-directory:
+    description: Where to run the action
+    required: false
+    default: .
+  args:
+    description: Command line arguments to pass to git-restore-mtime
+    required: false
+    default: ''
+outputs: {}
+runs:
+  using: composite
+  steps:
+    - uses: chetan/git-restore-mtime-action@d186aca54f8760da4dec55313195e51ed3ebb0b3
+      with:
+        working-directory: ${{ inputs.working-directory }}
+        args: ${{ inputs.args }}

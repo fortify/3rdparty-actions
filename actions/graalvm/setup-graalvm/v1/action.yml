@@ -1,0 +1,99 @@
+name: graalvm/setup-graalvm (wrapped) v1
+description: >-
+  Composite wrapper for graalvm/setup-graalvm pinned to
+  03e8abf916fd0e281b2efe7b2da3378bb0a1d085
+inputs:
+  java-version:
+    description: Java version. See examples of supported syntax in the README file.
+    required: true
+  java-package:
+    description: The package type (jdk or jdk+fx). Currently applies to Liberica only.
+    required: false
+    default: jdk
+  distribution:
+    description: >-
+      GraalVM distribution. See the list of available distributions in the
+      README file.
+    required: false
+    default: ''
+  components:
+    description: Comma-separated list of GraalVM components to be installed.
+    required: false
+    default: ''
+  github-token:
+    description: >-
+      Set it to secrets.GITHUB_TOKEN to increase rate limits when accessing the
+      GitHub API. Defaults to github.token.
+    required: false
+    default: ${{ github.token }}
+  set-java-home:
+    description: 'Set $JAVA_HOME to the GraalVM installation. Default: true.'
+    required: false
+    default: 'true'
+  cache:
+    description: >-
+      Name of the build platform to cache dependencies. It can be "maven",
+      "gradle", or "sbt".
+    required: false
+  check-for-updates:
+    description: >-
+      Annotate jobs with update notifications, for example, when a new GraalVM
+      release is available
+    required: false
+    default: 'true'
+  native-image-musl:
+    description: Set up musl for static image building with GraalVM Native Image.
+    required: false
+    default: 'false'
+  native-image-job-reports:
+    description: Post a job summary containing a Native Image build report.
+    required: false
+    default: 'false'
+  native-image-pr-reports:
+    description: Post a comment containing a Native Image build report on pull requests.
+    required: false
+    default: 'false'
+  native-image-pr-reports-update-existing:
+    description: >-
+      Instead of posting another comment, update an existing PR comment with the
+      latest Native Image build report.
+    required: false
+    default: 'false'
+  native-image-enable-sbom:
+    description: >-
+      Automatically generate an SBOM and submit it to the GitHub dependency
+      submission API for vulnerability and dependency tracking.
+    required: false
+    default: 'false'
+  version:
+    description: GraalVM version (release, latest, dev).
+    required: false
+    default: ''
+  gds-token:
+    description: >-
+      Download token for the GraalVM Download Service. If provided, the action
+      will set up GraalVM Enterprise Edition.
+    required: false
+outputs:
+  cache-hit:
+    description: A boolean value to indicate an exact match was found for the primary key
+runs:
+  using: composite
+  steps:
+    - uses: graalvm/setup-graalvm@03e8abf916fd0e281b2efe7b2da3378bb0a1d085
+      with:
+        java-version: ${{ inputs.java-version }}
+        java-package: ${{ inputs.java-package }}
+        distribution: ${{ inputs.distribution }}
+        components: ${{ inputs.components }}
+        github-token: ${{ inputs.github-token }}
+        set-java-home: ${{ inputs.set-java-home }}
+        cache: ${{ inputs.cache }}
+        check-for-updates: ${{ inputs.check-for-updates }}
+        native-image-musl: ${{ inputs.native-image-musl }}
+        native-image-job-reports: ${{ inputs.native-image-job-reports }}
+        native-image-pr-reports: ${{ inputs.native-image-pr-reports }}
+        native-image-pr-reports-update-existing: ${{ inputs.native-image-pr-reports-update-existing }}
+        native-image-enable-sbom: ${{ inputs.native-image-enable-sbom }}
+        version: ${{ inputs.version }}
+        gds-token: ${{ inputs.gds-token }}

@@ -1,0 +1,16 @@
+name: stcarolas/setup-maven (wrapped) v5
+description: >-
+  Composite wrapper for stcarolas/setup-maven pinned to
+  d6af6abeda15e98926a57b5aa970a96bb37f97d1
+inputs:
+  maven-version:
+    description: 'Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0'
+    required: false
+    default: 3.8.2
+outputs: {}
+runs:
+  using: composite
+  steps:
+    - uses: stcarolas/setup-maven@d6af6abeda15e98926a57b5aa970a96bb37f97d1
+      with:
+        maven-version: ${{ inputs.maven-version }}

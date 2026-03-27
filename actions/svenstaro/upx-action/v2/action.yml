@@ -1,0 +1,32 @@
+name: svenstaro/upx-action (wrapped) v2
+description: >-
+  Composite wrapper for svenstaro/upx-action pinned to
+  cf8fc6f17554e2c3ac67a479a60cf71b48babc4f
+inputs:
+  file:
+    description: Local file to pack (deprecated, prefer `files`)
+    required: true
+  files:
+    description: Newline separated globs to pack
+    required: false
+  args:
+    description: Arguments to pass to UPX
+    required: false
+  strip:
+    description: Whether or not "strip" symbols from object file
+    required: false
+    default: 'true'
+  strip_args:
+    description: Arguments to pass to strip
+    required: false
+outputs: {}
+runs:
+  using: composite
+  steps:
+    - uses: svenstaro/upx-action@cf8fc6f17554e2c3ac67a479a60cf71b48babc4f
+      with:
+        file: ${{ inputs.file }}
+        files: ${{ inputs.files }}
+        args: ${{ inputs.args }}
+        strip: ${{ inputs.strip }}
+        strip_args: ${{ inputs.strip_args }}

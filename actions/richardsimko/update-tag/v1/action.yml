@@ -1,0 +1,20 @@
+name: richardsimko/update-tag (wrapped) v1
+description: >-
+  Composite wrapper for richardsimko/update-tag pinned to
+  aab2434e9a5040687874aa39d1c6377ec0cb0d94
+inputs:
+  tag_name:
+    description: Name of the tag to create or update
+    required: true
+  github_token:
+    description: Authorized secret GitHub Personal Access Token. Defaults to github.token
+    required: false
+    default: ${{ github.token }}
+outputs: {}
+runs:
+  using: composite
+  steps:
+    - uses: richardsimko/update-tag@aab2434e9a5040687874aa39d1c6377ec0cb0d94
+      with:
+        tag_name: ${{ inputs.tag_name }}
+        github_token: ${{ inputs.github_token }}
