@@ -123,6 +123,9 @@ outputs:
       Value is "true", if a git tag was created using the
       `create_git_tag_only`-input.
     value: ${{ steps.upstream.outputs.create_git_tag_only }}
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

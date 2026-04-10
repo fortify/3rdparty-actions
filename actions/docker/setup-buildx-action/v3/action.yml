@@ -90,6 +90,9 @@ outputs:
   flags:
     description: Builder node flags (deprecated, use nodes output instead)
     value: ${{ steps.upstream.outputs.flags }}
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

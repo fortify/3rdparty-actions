@@ -131,6 +131,9 @@ outputs:
   metadata:
     description: Build result metadata
     value: ${{ steps.upstream.outputs.metadata }}
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

@@ -27,7 +27,10 @@ inputs:
   registry-auth:
     description: Raw authentication to registries, defined as YAML objects
     required: false
-outputs: {}
+outputs:
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

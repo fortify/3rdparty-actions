@@ -7,7 +7,10 @@ inputs:
     description: 'Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0'
     required: false
     default: 3.8.2
-outputs: {}
+outputs:
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

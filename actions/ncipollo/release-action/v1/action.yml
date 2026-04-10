@@ -188,6 +188,9 @@ outputs:
       JSON string containing a map of asset names to download URLs for uploaded
       assets.
     value: ${{ steps.upstream.outputs.assets }}
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

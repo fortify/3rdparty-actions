@@ -78,6 +78,9 @@ outputs:
   cache-hit:
     description: A boolean value to indicate an exact match was found for the primary key
     value: ${{ steps.upstream.outputs.cache-hit }}
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

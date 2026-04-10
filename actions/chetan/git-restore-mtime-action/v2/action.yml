@@ -11,7 +11,10 @@ inputs:
     description: Command line arguments to pass to git-restore-mtime
     required: false
     default: ''
-outputs: {}
+outputs:
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

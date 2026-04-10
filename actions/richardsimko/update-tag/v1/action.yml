@@ -10,7 +10,10 @@ inputs:
     description: Authorized secret GitHub Personal Access Token. Defaults to github.token
     required: false
     default: ${{ github.token }}
-outputs: {}
+outputs:
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:

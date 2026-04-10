@@ -19,7 +19,10 @@ inputs:
   strip_args:
     description: Arguments to pass to strip
     required: false
-outputs: {}
+outputs:
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
 runs:
   using: composite
   steps:
