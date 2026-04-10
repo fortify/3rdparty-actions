@@ -1,0 +1,10 @@
+{
+  "googleapis/release-please-action@v4": {
+    "release_created": "Whether a release was created",
+    "tag_name": "Tag name created",
+    "version": "Release version",
+    "major": "Major version number",
+    "minor": "Minor version number",
+    "patch": "Patch version or build metadata"
+  }
+}

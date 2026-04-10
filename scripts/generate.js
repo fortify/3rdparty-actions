@@ -191,6 +191,17 @@ async function fetchActionYaml(owner, repo, ref) {
 
 async function main(){
   console.log('Reading allowed actions for org', ORG);
+  // Load optional outputs.json that can declare outputs for generated wrappers.
+  let declaredOutputs = {};
+  try {
+    const outputsPath = path.join(process.cwd(),'outputs.json');
+    if (fs.existsSync(outputsPath)) {
+      declaredOutputs = JSON.parse(fs.readFileSync(outputsPath,'utf8') || '{}');
+      console.log('Loaded outputs.json with', Object.keys(declaredOutputs).length, 'entries');
+    }
+  } catch (e) {
+    console.warn('Failed to read outputs.json:', e.message || e);
+  }
   // Prefer GitHub App authentication when configured
   // Obtain installation token via GitHub App; this script requires the App to be installed on the org
   const tok = await obtainAppInstallationToken(ORG);
@@ -352,8 +363,33 @@ async function main(){
       }
       // Use a consistent step id for the upstream action so we can map outputs
       const stepId = 'upstream';
-      for (const [k,v] of Object.entries(outputs||{})){
-        actionYamlOut.outputs[k] = { description: v.description || '', value: '${{ steps.' + stepId + '.outputs.' + k + ' }}' };
+      // First prefer declared outputs from outputs.json (key: owner/repo@v<major>)
+      const outputsKey = `${owner}/${repo}@v${maj}`;
+      if (declaredOutputs && declaredOutputs[outputsKey]) {
+        const decl = declaredOutputs[outputsKey];
+        // support either array of names or object map name->description
+        if (Array.isArray(decl)) {
+          for (const name of decl) {
+            actionYamlOut.outputs[name] = { description: '', value: '${{ steps.' + stepId + '.outputs.' + name + ' }}' };
+          }
+        } else if (typeof decl === 'object' && decl !== null) {
+          for (const [name,desc] of Object.entries(decl)) {
+            actionYamlOut.outputs[name] = { description: desc || '', value: '${{ steps.' + stepId + '.outputs.' + name + ' }}' };
+          }
+        }
+      } else {
+        for (const [k,v] of Object.entries(outputs||{})){
+          actionYamlOut.outputs[k] = { description: v.description || '', value: '${{ steps.' + stepId + '.outputs.' + k + ' }}' };
+        }
+      }
+
+      // Also expose all outputs produced by the upstream step as a single JSON value.
+      // This helps when the upstream action does not declare outputs statically.
+      if (!actionYamlOut.outputs.all_upstream_outputs) {
+        actionYamlOut.outputs.all_upstream_outputs = {
+          description: 'All outputs from upstream step as JSON',
+          value: '${{ toJSON(steps.' + stepId + '.outputs) }}'
+        };
       }
 
       // steps: single uses pointing to upstream sha/ref
