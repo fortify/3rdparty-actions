@@ -350,8 +350,10 @@ async function main(){
         }
         actionYamlOut.inputs[k] = entry;
       }
+      // Use a consistent step id for the upstream action so we can map outputs
+      const stepId = 'upstream';
       for (const [k,v] of Object.entries(outputs||{})){
-        actionYamlOut.outputs[k] = { description: v.description || '' };
+        actionYamlOut.outputs[k] = { description: v.description || '', value: '${{ steps.' + stepId + '.outputs.' + k + ' }}' };
       }
 
       // steps: single uses pointing to upstream sha/ref
@@ -359,7 +361,7 @@ async function main(){
       // keep that ref so the composite doesn't reference a SHA that isn't yet allowed by org settings.
       const usesRef = `${owner}/${repo}@${chosen.ref}`;
       const steps = [];
-      const step = { uses: usesRef };
+      const step = { id: stepId, uses: usesRef };
       if (Object.keys(actionYamlOut.inputs).length) {
         step.with = {};
         for (const k of Object.keys(actionYamlOut.inputs)){
