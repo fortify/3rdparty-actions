@@ -14,7 +14,8 @@ outputs: {}
 runs:
   using: composite
   steps:
-    - uses: richardsimko/update-tag@aab2434e9a5040687874aa39d1c6377ec0cb0d94
+    - id: upstream
+      uses: richardsimko/update-tag@aab2434e9a5040687874aa39d1c6377ec0cb0d94
       with:
         tag_name: ${{ inputs.tag_name }}
         github_token: ${{ inputs.github_token }}

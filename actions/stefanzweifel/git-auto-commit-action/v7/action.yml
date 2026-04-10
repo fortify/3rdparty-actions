@@ -112,18 +112,22 @@ outputs:
     description: >-
       Value is "true", if the repository was dirty and file changes have been
       detected. Value is "false", if no changes have been detected.
+    value: ${{ steps.upstream.outputs.changes_detected }}
   commit_hash:
     description: >-
       Full hash of the created commit. Only present if the "changes_detected"
       output is "true".
+    value: ${{ steps.upstream.outputs.commit_hash }}
   create_git_tag_only:
     description: >-
       Value is "true", if a git tag was created using the
       `create_git_tag_only`-input.
+    value: ${{ steps.upstream.outputs.create_git_tag_only }}
 runs:
   using: composite
   steps:
-    - uses: >-
+    - id: upstream
+      uses: >-
         stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9
       with:
         commit_message: ${{ inputs.commit_message }}

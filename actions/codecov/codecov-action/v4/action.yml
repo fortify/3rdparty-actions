@@ -135,7 +135,8 @@ outputs: {}
 runs:
   using: composite
   steps:
-    - uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238
+    - id: upstream
+      uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238
       with:
         token: ${{ inputs.token }}
         codecov_yml_path: ${{ inputs.codecov_yml_path }}

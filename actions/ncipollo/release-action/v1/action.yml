@@ -170,22 +170,29 @@ inputs:
 outputs:
   id:
     description: The identifier of the created release.
+    value: ${{ steps.upstream.outputs.id }}
   html_url:
     description: The HTML URL of the release.
+    value: ${{ steps.upstream.outputs.html_url }}
   upload_url:
     description: The URL for uploading assets to the release.
+    value: ${{ steps.upstream.outputs.upload_url }}
   tarball_url:
     description: The URL for downloading the release as a tarball (.tar.gz).
+    value: ${{ steps.upstream.outputs.tarball_url }}
   zipball_url:
     description: The URL for downloading the release as a zipball (.zip).
+    value: ${{ steps.upstream.outputs.zipball_url }}
   assets:
     description: >-
       JSON string containing a map of asset names to download URLs for uploaded
       assets.
+    value: ${{ steps.upstream.outputs.assets }}
 runs:
   using: composite
   steps:
-    - uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b
+    - id: upstream
+      uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b
       with:
         allowUpdates: ${{ inputs.allowUpdates }}
         artifactErrorsFailBuild: ${{ inputs.artifactErrorsFailBuild }}

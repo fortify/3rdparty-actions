@@ -31,7 +31,8 @@ outputs: {}
 runs:
   using: composite
   steps:
-    - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
+    - id: upstream
+      uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
       with:
         registry: ${{ inputs.registry }}
         username: ${{ inputs.username }}

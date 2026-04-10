@@ -15,7 +15,8 @@ outputs: {}
 runs:
   using: composite
   steps:
-    - uses: chetan/git-restore-mtime-action@d186aca54f8760da4dec55313195e51ed3ebb0b3
+    - id: upstream
+      uses: chetan/git-restore-mtime-action@d186aca54f8760da4dec55313195e51ed3ebb0b3
       with:
         working-directory: ${{ inputs.working-directory }}
         args: ${{ inputs.args }}

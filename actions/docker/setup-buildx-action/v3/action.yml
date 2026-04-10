@@ -71,22 +71,30 @@ inputs:
 outputs:
   name:
     description: Builder name
+    value: ${{ steps.upstream.outputs.name }}
   driver:
     description: Builder driver
+    value: ${{ steps.upstream.outputs.driver }}
   platforms:
     description: Builder node platforms (preferred or available)
+    value: ${{ steps.upstream.outputs.platforms }}
   nodes:
     description: Builder nodes metadata
+    value: ${{ steps.upstream.outputs.nodes }}
   endpoint:
     description: Builder node endpoint (deprecated, use nodes output instead)
+    value: ${{ steps.upstream.outputs.endpoint }}
   status:
     description: Builder node status (deprecated, use nodes output instead)
+    value: ${{ steps.upstream.outputs.status }}
   flags:
     description: Builder node flags (deprecated, use nodes output instead)
+    value: ${{ steps.upstream.outputs.flags }}
 runs:
   using: composite
   steps:
-    - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
+    - id: upstream
+      uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
       with:
         version: ${{ inputs.version }}
         driver: ${{ inputs.driver }}

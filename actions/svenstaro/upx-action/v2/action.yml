@@ -23,7 +23,8 @@ outputs: {}
 runs:
   using: composite
   steps:
-    - uses: svenstaro/upx-action@cf8fc6f17554e2c3ac67a479a60cf71b48babc4f
+    - id: upstream
+      uses: svenstaro/upx-action@cf8fc6f17554e2c3ac67a479a60cf71b48babc4f
       with:
         file: ${{ inputs.file }}
         files: ${{ inputs.files }}

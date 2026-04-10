@@ -124,14 +124,18 @@ inputs:
 outputs:
   imageid:
     description: Image ID
+    value: ${{ steps.upstream.outputs.imageid }}
   digest:
     description: Image digest
+    value: ${{ steps.upstream.outputs.digest }}
   metadata:
     description: Build result metadata
+    value: ${{ steps.upstream.outputs.metadata }}
 runs:
   using: composite
   steps:
-    - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
+    - id: upstream
+      uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
       with:
         add-hosts: ${{ inputs.add-hosts }}
         allow: ${{ inputs.allow }}
