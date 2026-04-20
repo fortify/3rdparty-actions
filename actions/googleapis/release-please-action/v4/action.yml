@@ -104,6 +104,9 @@ outputs:
   patch:
     description: Patch version or build metadata
     value: ${{ steps.upstream.outputs.patch }}
+  pr:
+    description: Release PR details as JSON
+    value: ${{ steps.upstream.outputs.pr }}
   all_upstream_outputs:
     description: All outputs from upstream step as JSON
     value: ${{ toJSON(steps.upstream.outputs) }}
