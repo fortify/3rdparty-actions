@@ -5,6 +5,7 @@
     "version": "Release version",
     "major": "Major version number",
     "minor": "Minor version number",
-    "patch": "Patch version or build metadata"
+    "patch": "Patch version or build metadata",
+    "pr": "Release PR details as JSON"
   }
 }
