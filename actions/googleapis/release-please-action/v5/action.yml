@@ -86,6 +86,27 @@ inputs:
     required: false
     default: ''
 outputs:
+  release_created:
+    description: Whether a release was created
+    value: ${{ steps.upstream.outputs.release_created }}
+  tag_name:
+    description: Tag name created
+    value: ${{ steps.upstream.outputs.tag_name }}
+  version:
+    description: Release version
+    value: ${{ steps.upstream.outputs.version }}
+  major:
+    description: Major version number
+    value: ${{ steps.upstream.outputs.major }}
+  minor:
+    description: Minor version number
+    value: ${{ steps.upstream.outputs.minor }}
+  patch:
+    description: Patch version or build metadata
+    value: ${{ steps.upstream.outputs.patch }}
+  pr:
+    description: Release PR details as JSON
+    value: ${{ steps.upstream.outputs.pr }}
   all_upstream_outputs:
     description: All outputs from upstream step as JSON
     value: ${{ toJSON(steps.upstream.outputs) }}
