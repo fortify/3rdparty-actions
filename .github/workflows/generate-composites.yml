@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Remove existing wrapper actions
+        run: rm -rf actions
+
       - name: Run generator
         env:
           ORG: ${{ github.repository_owner }}
