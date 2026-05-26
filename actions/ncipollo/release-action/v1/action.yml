@@ -15,12 +15,6 @@ inputs:
       fail the build.
     required: false
     default: ''
-  artifact:
-    description: >-
-      An optional set of paths representing artifacts to upload to the release.
-      This may be a single path or a comma delimited list of paths (or globs)
-    required: false
-    default: ''
   artifacts:
     description: >-
       An optional set of paths representing artifacts to upload to the release.
@@ -199,7 +193,6 @@ runs:
       with:
         allowUpdates: ${{ inputs.allowUpdates }}
         artifactErrorsFailBuild: ${{ inputs.artifactErrorsFailBuild }}
-        artifact: ${{ inputs.artifact }}
         artifacts: ${{ inputs.artifacts }}
         artifactContentType: ${{ inputs.artifactContentType }}
         body: ${{ inputs.body }}

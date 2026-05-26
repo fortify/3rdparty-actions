@@ -13,9 +13,6 @@ inputs:
   args:
     description: Arguments to pass to UPX
     required: false
-  file:
-    description: File to compress
-    required: false
   install-only:
     description: Just install upx
     required: false
@@ -33,5 +30,4 @@ runs:
         version: ${{ inputs.version }}
         files: ${{ inputs.files }}
         args: ${{ inputs.args }}
-        file: ${{ inputs.file }}
         install-only: ${{ inputs.install-only }}

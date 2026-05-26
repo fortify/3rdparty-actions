@@ -58,16 +58,6 @@ inputs:
     description: Cleanup temp files and remove builder at the end of a job
     required: false
     default: 'true'
-  config:
-    description: BuildKit daemon config file
-    required: false
-  config-inline:
-    description: Inline BuildKit daemon config
-    required: false
-  install:
-    description: Sets up docker build command as an alias to docker buildx build
-    required: false
-    default: 'false'
 outputs:
   name:
     description: Builder name
@@ -113,6 +103,3 @@ runs:
         keep-state: ${{ inputs.keep-state }}
         cache-binary: ${{ inputs.cache-binary }}
         cleanup: ${{ inputs.cleanup }}
-        config: ${{ inputs.config }}
-        config-inline: ${{ inputs.config-inline }}
-        install: ${{ inputs.install }}
