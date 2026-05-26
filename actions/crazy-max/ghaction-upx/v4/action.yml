@@ -1,0 +1,37 @@
+name: crazy-max/ghaction-upx (wrapped) v4
+description: >-
+  Composite wrapper for crazy-max/ghaction-upx pinned to
+  c83f378efc804f828e988debb88ed6116feb2368
+inputs:
+  version:
+    description: 'UPX version. Example: 3.95'
+    required: false
+    default: latest
+  files:
+    description: Newline-delimited list of path globs for files to compress
+    required: false
+  args:
+    description: Arguments to pass to UPX
+    required: false
+  file:
+    description: File to compress
+    required: false
+  install-only:
+    description: Just install upx
+    required: false
+    default: 'false'
+outputs:
+  all_upstream_outputs:
+    description: All outputs from upstream step as JSON
+    value: ${{ toJSON(steps.upstream.outputs) }}
+runs:
+  using: composite
+  steps:
+    - id: upstream
+      uses: crazy-max/ghaction-upx@c83f378efc804f828e988debb88ed6116feb2368
+      with:
+        version: ${{ inputs.version }}
+        files: ${{ inputs.files }}
+        args: ${{ inputs.args }}
+        file: ${{ inputs.file }}
+        install-only: ${{ inputs.install-only }}
