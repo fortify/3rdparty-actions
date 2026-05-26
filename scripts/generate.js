@@ -353,8 +353,10 @@ async function main(){
         outputs: {}
       };
 
-      // mirror inputs (including default values when present)
+      // mirror inputs (excluding deprecated inputs, as passing them always triggers a deprecation
+      // warning in GitHub Actions, even when passed with an empty value from a wrapper action)
       for (const [k,v] of Object.entries(inputs||{})){
+        if (v && v.deprecationMessage) continue;
         const entry = { description: v.description || '', required: v.required || false };
         if (v && Object.prototype.hasOwnProperty.call(v, 'default')) {
           entry.default = v.default;
